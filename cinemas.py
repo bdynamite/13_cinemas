@@ -18,8 +18,9 @@ def get_films_from_afisha(min_cinemas_count=10):
 
 
 def get_film_rating(film_name):
-    kinopoisk_url = 'https://www.kinopoisk.ru/index.php?first=yes&what=&kp_query='
-    responce = requests.get(''.join([kinopoisk_url, film_name]))
+    kinopoisk_url = 'https://www.kinopoisk.ru/index.php'
+    url_params = {'first': 'yes', 'kp_query': film_name}
+    responce = requests.get(kinopoisk_url, params=url_params)
     soup = BeautifulSoup(responce.text, 'html.parser')
     rating_tag = soup.find(attrs={'class': 'rating_ball'})
     if rating_tag:
